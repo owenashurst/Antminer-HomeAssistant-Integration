@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/compare/v1.0.0...v1.0.1) (2026-04-13)
+
+
+### Bug Fixes
+
+* add dark icon ([#6](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/issues/6)) ([7439521](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/commit/7439521d59b172968fc2a5a0c94ad18e359e4480))
+
 ## 1.0.0 (2026-04-13)
 
 
