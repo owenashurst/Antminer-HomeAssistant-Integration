@@ -18,3 +18,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: simple
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
