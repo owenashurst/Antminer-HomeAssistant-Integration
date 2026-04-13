@@ -1,11 +1,11 @@
 {
   "domain": "antminer",
   "name": "Antminer",
-  "version": "1.0.0",
-  "documentation": "https://github.com/yourusername/antminer-home-assistant-integration",
-  "issue_tracker": "https://github.com/yourusername/antminer-home-assistant-integration/issues",
   "codeowners": [],
-  "requirements": [],
+  "config_flow": true,
+  "documentation": "https://github.com/owenashurst/Antminer-HomeAssistant-Integration",
   "iot_class": "local_polling",
-  "config_flow": true
+  "issue_tracker": "https://github.com/owenashurst/Antminer-HomeAssistant-Integration/issues",
+  "requirements": [],
+  "version": "1.0.0"
 }
