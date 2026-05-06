@@ -111,9 +111,13 @@ class AntminerCoordinator(DataUpdateCoordinator[dict]):
         payload.update(overrides)
 
         auth = self._auth()
-        timeout = httpx.Timeout(10.0)
+        # Use a generous timeout for the POST – when waking from Sleep the
+        # miner restarts its services and may take 30+ seconds to reply.
+        # The connect timeout stays short so we fail fast if the host is
+        # unreachable; only the read timeout is extended.
+        post_timeout = httpx.Timeout(10.0, read=60.0)
         try:
-            async with httpx.AsyncClient(auth=auth, timeout=timeout) as client:
+            async with httpx.AsyncClient(auth=auth, timeout=post_timeout) as client:
                 resp = await client.post(
                     f"{self._base_url}/cgi-bin/set_miner_conf.cgi",
                     json=payload,
@@ -123,6 +127,15 @@ class AntminerCoordinator(DataUpdateCoordinator[dict]):
                 # non-standard codes on 4xx that still mean "accepted".
                 if resp.status_code >= 500:
                     resp.raise_for_status()
+        except httpx.ReadTimeout:
+            # The miner accepted the command but restarted before sending a
+            # response – this is normal behaviour when changing modes.
+            # Treat it as success and let the delayed refresh pick up the
+            # new state once the miner is back online.
+            _LOGGER.debug(
+                "POST to set_miner_conf.cgi timed out waiting for response "
+                "(miner likely restarting after mode change) – treating as success"
+            )
         except httpx.HTTPStatusError as err:
             _LOGGER.error(
                 "Failed to apply settings – HTTP %s", err.response.status_code
