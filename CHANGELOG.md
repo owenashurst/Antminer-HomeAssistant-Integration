@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/compare/v1.0.1...v1.0.2) (2026-05-06)
+
+
+### Bug Fixes
+
+* increase POST timeout to prevent false errors on mode change ([#9](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/issues/9)) ([1dd4480](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/commit/1dd4480ca14a48aa4a715669789b04e102d49e02))
+
 ## [1.0.1](https://github.com/owenashurst/Antminer-HomeAssistant-Integration/compare/v1.0.0...v1.0.1) (2026-04-13)
 
 
